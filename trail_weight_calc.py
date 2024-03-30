@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Display a title for your app
-st.title('Fan Balancing Helper')
+st.title('Fan Balancing Helper by Jose Cedeno')
 
 # Use Streamlit's input widgets instead of input()
 fan_mass = st.number_input("Enter the mass of the fan in kilograms:", min_value=0.0, format='%f')
