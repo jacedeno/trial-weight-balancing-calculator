@@ -1,25 +1,17 @@
-import streamlit as st
+# Title of the app
+st.title('Unbalance weight/radius calculator by Jose Cedeno')
 
-# Display a title for your app
-st.title('Fan Balancing Helper by Jose Cedeno')
+# User inputs for the reference conditions
+st.header('Reference Conditions')
+reference_radius = st.number_input('Enter the reference radius in inches:', value=10.0, format="%.2f")
+reference_weight_grams = st.number_input('Enter the reference weight in grams:', value=28.35, format="%.2f")
 
-# Use Streamlit's input widgets instead of input()
-fan_mass = st.number_input("Enter the mass of the fan in kilograms:", min_value=0.0, format='%f')
-rotor_radius = st.number_input("Enter the rotor radius in meters:", min_value=0.0, format='%f')
-max_speed_rpm = st.number_input("Enter the maximum operating speed in RPM:", min_value=0, format='%d')
+# User input for the radius for which the trial weight is to be calculated
+st.header('Calculation Parameters')
+input_radius = st.number_input('Enter the radius for which you want to calculate the trial weight in inches:', value=10.0, format="%.2f")
 
-# You can add a button to perform the calculation
-if st.button('Calculate Suggested Trial Weight'):
-    # The calculation logic remains the same
-    trial_weight_percentage = 0.1  # Starting with 0.1% of the fan's mass
-    trial_weight = (fan_mass * 1000 * trial_weight_percentage / 100) * (rotor_radius * max_speed_rpm / 10000)
-
-    # Use Streamlit's way to display the output instead of print()
-    st.write(f"Suggested trial weight is: {trial_weight:.2f} grams")
-
-# Note about the illustrative purposes of the app
-st.markdown("""
-*Note: This tool is for illustrative purposes and the calculations for suggesting a trial weight
-should ideally be based on detailed guidelines from equipment manufacturers or balancing experts.
-The percentages and factors used here may need to be adjusted to suit specific cases.*
-""")
+# Calculate the trial weight based on the user inputs
+if st.button('Calculate Trial Weight'):
+    trial_weight_grams = reference_weight_grams * (reference_radius / input_radius)
+    st.write(f"Based on the reference conditions ({reference_weight_grams} grams at a radius of {reference_radius} inches),")
+    st.write(f"the suggested trial weight for a radius of {input_radius} inches is: {trial_weight_grams:.2f} grams")
